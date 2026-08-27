@@ -2,7 +2,7 @@
 
 > A web-based decision-support application that helps households and institutions assess **rooftop rainwater harvesting potential** and identify suitable water storage or groundwater recharge structures.
 
-## ✨ Overview
+## Overview
 
 The **Rainwater Harvesting Assessment Application** provides a simple way to estimate rainwater harvesting potential using location and rooftop information.
 
@@ -14,7 +14,7 @@ Users provide basic details such as:
 
 The application analyzes the available information and provides **personalized recommendations** for suitable rainwater harvesting structures.
 
-## 🎯 Key Features
+## Key Features
 
 * **Rainwater Potential Assessment**
 * **Location-based rainfall data**
@@ -28,7 +28,7 @@ The application analyzes the available information and provides **personalized r
 
 The application is designed to provide personalized recommendations for storage and recharge structures while remaining usable in low-network environments.
 
-## 🧠 How It Works
+## How It Works
 
 <p align="center">
   <img src="./Rainwater harvesting assessment app.png" width="500" alt="Rainwater Harvesting System Architecture">
@@ -36,7 +36,7 @@ The application is designed to provide personalized recommendations for storage 
   <em>Fig. System Architecture</em>
 </p>
 
-## 🏗️ Recommended Structures
+## Recommended Structures
 
 Depending on the assessment, the application can recommend suitable approaches such as:
 
@@ -47,7 +47,7 @@ Depending on the assessment, the application can recommend suitable approaches s
 
 The decision-support module is intended to help users select an appropriate harvesting or recharge structure.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer           | Technology            |
 | --------------- | --------------------- |
@@ -60,7 +60,7 @@ The decision-support module is intended to help users select an appropriate harv
 
 The proposed technical architecture uses HTML/CSS/JavaScript with a Python Flask backend, supported by Pandas, Matplotlib and Plotly.
 
-## 📊 Data Sources
+## Data Sources
 
 The application is designed to work with rainfall information from reliable sources, including:
 
