@@ -64,8 +64,8 @@ The proposed technical architecture uses HTML/CSS/JavaScript with a Python Flask
 
 The application is designed to work with rainfall information from reliable sources, including:
 
-* **CGWB — Central Ground Water Board**
-* **IMD — India Meteorological Department**
+* **CGWB - Central Ground Water Board**
+* **IMD - India Meteorological Department**
 * Government-approved rainfall APIs
 * Static rainfall datasets for offline use
 
