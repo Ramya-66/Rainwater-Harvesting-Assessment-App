@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RainIQ Calculator</title>
+
+<style>
+/* --- base --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  /* Background same as home.html */
+  background: url("{{ url_for('static', filename='images/house.png') }}") center/cover no-repeat,
+              linear-gradient(180deg,#08306b 0%,#1464b6 55%,#1976d2 100%);
+}
+
+/* --- navbar --- */
+.navbar {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 20px;
+}
+.nav-left { display:flex; align-items:center; gap:18px; }
+.logo { display:flex; align-items:center; gap:10px; font-weight:600; font-size:20px; }
+.logo .mark {
+  width:40px; height:40px; border-radius:50%;
+  border:2px solid rgba(255,255,255,0.25);
+  display:flex; align-items:center; justify-content:center;
+}
+.menu { display:flex; gap:22px; margin-left:6px; }
+.menu a {
+  text-decoration:none; color:rgba(255,255,255,0.95);
+  font-weight:600; letter-spacing:0.6px;
+}
+.menu a:hover { text-decoration: underline; color: #ffff80; }
+
+/* --- container --- */
+.container {
+  background: rgba(3,12,40,0.85);
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+input, select, button {
+  padding: 10px 15px;
+  margin: 10px 0;
+  width: 100%;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+button {
+  background: #1a7f42;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:hover { background: #145c2f; }
+.result {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+}
+</style>
+</head>
+<body>
+
+<header class="navbar" role="navigation">
+  <div class="nav-left">
+    <div class="logo">
+      <div class="mark">💧</div>
+      <div>RainIQ</div>
+    </div>
+    <nav class="menu">
+      <a href="/home">HOME</a>
+      {% if user %}
+        <a href="/calculator">CALCULATOR</a>
+        <a href="/logout" style="color:yellow;">LOGOUT</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <h2>Rainwater Harvesting Calculator</h2>
+  <form id="calcForm">
+    <input type="number" id="catchmentArea" placeholder="Enter Catchment Area (sq.m)" required>
+    <select id="city" required>
+      <option value="">Select City</option>
+      <option value="Mumbai">Mumbai</option>
+      <option value="Delhi">Delhi</option>
+      <option value="Chennai">Chennai</option>
+      <option value="Bengaluru">Bengaluru</option>
+    </select>
+    <button type="submit">Calculate</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+const cityRainfall = {
+  "Mumbai": 2420,
+  "Delhi": 800,
+  "Chennai": 1400,
+  "Bengaluru": 970
+};
+
+document.getElementById("calcForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const catchmentArea = parseFloat(document.getElementById("catchmentArea").value);
+  const city = document.getElementById("city").value;
+
+  if (!city || !catchmentArea) return;
+
+  const rainfall = cityRainfall[city];
+  const harvestableWater = catchmentArea * rainfall * 0.8 / 1000;
+  const suggestedTankCapacity = Math.min(harvestableWater, 10000);
+  const waterSaved = harvestableWater;
+
+  document.getElementById("result").innerHTML = `
+    <p><strong>City:</strong> ${city}</p>
+    <p><strong>Catchment Area:</strong> ${catchmentArea} sq.m</p>
+    <p><strong>Annual Rainfall:</strong> ${rainfall} mm</p>
+    <p><strong>Estimated Rainwater Harvest:</strong> ${harvestableWater.toFixed(2)} liters</p>
+    <p><strong>Suggested Tank Capacity:</strong> ${suggestedTankCapacity.toFixed(2)} liters</p>
+    <p><strong>Potential Water Saved:</strong> ${waterSaved.toFixed(2)} liters</p>
+  `;
+});
+</script>
+
+</body>
+</html>
